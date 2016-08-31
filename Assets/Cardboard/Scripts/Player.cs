@@ -13,6 +13,9 @@ public class Player : MonoBehaviour {
     //prevents flying effect
     private bool onGround;
 
+    //fixes collision jump bug
+    private float lastJumpRequestTime;
+
 	// Use this for initialization
 	void Start () {
         
@@ -35,20 +38,33 @@ public class Player : MonoBehaviour {
 
     private void PullTrigger ()
     {
-        //Allows character to jump with each trigger pull
-        //Add natural jumping
+        requestJump();
 
-        if (onGround)
-        {
+    }
+
+    private void Jump ()
+    {
+       
             float jumpAngleInRadians = jumpAngleInDegrees * Mathf.Deg2Rad;
             Vector3 projectedVector = Vector3.ProjectOnPlane(head.Gaze.direction, Vector3.up);
             Vector3 jumpVector = Vector3.RotateTowards(projectedVector, Vector3.up, jumpAngleInRadians, 0);
             rb.velocity = jumpVector * jumpSpeed;
+        
+    }
+
+    private void requestJump ()
+    {
+        lastJumpRequestTime = Time.time;
+        rb.WakeUp();
+    }
+
+    void OnCollisionStay(Collision Collision )
+    {
+        float delta = Time.time - lastJumpRequestTime;
+        if (delta < 0.1)
+        {
+            Jump();
+            lastJumpRequestTime = 0.0f;
         }
-            }
-
-    // Update is called once per frame
-    void Update () {
-
-	}
+    }
 }
