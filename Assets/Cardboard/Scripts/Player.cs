@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour {
 
     private CardboardHead head;
-    public Text gazeText;
     private Rigidbody rb;
 
     public float jumpSpeed;
@@ -51,6 +50,5 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-        gazeText.text = head.Gaze.ToString();
 	}
 }
