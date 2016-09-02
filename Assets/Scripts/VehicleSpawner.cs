@@ -8,16 +8,32 @@ public class VehicleSpawner : MonoBehaviour {
     public float speed = 5.0f;
     public float length = 10f;
 
+    public float maxSpawnTime = 10.0f;
+
    
     
 
 	// Use this for initialization
 	void Start () {
 
-        instantiateVehicle();
+        StartCoroutine("Spawn");
+       
        
         
 	}
+
+    //Spawn Interval Method
+    IEnumerator Spawn ()
+    {
+        while (true)
+
+        {
+            float spawnTime = Random.Range(0.5f, maxSpawnTime);
+            yield return new WaitForSeconds(spawnTime);
+            instantiateVehicle();
+          
+        }
+    }
 
     Vector3 getPositionOffset ()
     {
@@ -29,7 +45,8 @@ public class VehicleSpawner : MonoBehaviour {
 
     void instantiateVehicle ()
     {
-        GameObject vehicle = Instantiate(vehiclePrefabs[0]);
+        int spawnVehicle = Random.Range(0, vehiclePrefabs.Length);
+        GameObject vehicle = Instantiate(vehiclePrefabs[spawnVehicle]);
         vehicle.transform.position = getPositionOffset();
         vehicle.transform.parent = transform;
 

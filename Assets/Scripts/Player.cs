@@ -35,20 +35,22 @@ public class Player : MonoBehaviour {
 
     private void PullTrigger ()
     {
-        if (!state.isGameOver)
-        {
+        
+        
             requestJump();
-        }
+        
 
     }
 
     private void Jump ()
     {
-       
+        if (!state.isGameOver)
+        {
+
             float jumpAngleInRadians = jumpAngleInDegrees * Mathf.Deg2Rad;
             Vector3 jumpVector = Vector3.RotateTowards(lookDirection(), Vector3.up, jumpAngleInRadians, 0);
             rb.velocity = jumpVector * jumpSpeed;
-        
+        }
     }
 
    public  Vector3 lookDirection ()
@@ -65,7 +67,7 @@ public class Player : MonoBehaviour {
     void OnCollisionStay(Collision Collision )
     {
         float delta = Time.time - lastJumpRequestTime;
-        if (delta < 0.1)
+        if (delta < 0.05)
         {
             Jump();
             lastJumpRequestTime = 0.0f;
