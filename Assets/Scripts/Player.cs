@@ -10,6 +10,9 @@ public class Player : MonoBehaviour {
     public float jumpSpeed;
     public float jumpAngleInDegrees;
 
+    //game state
+    private GameState state;
+
     //prevents flying effect
     private bool onGround;
 
@@ -18,6 +21,8 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+        state = GameObject.FindObjectOfType<GameState>();
         
         //add handler for trigger events
         Cardboard.SDK.OnTrigger += PullTrigger;
@@ -26,19 +31,14 @@ public class Player : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
 	}
 
-    void OnCollisionEnter(Collision collision )
-    {
-        onGround = true;
-    }
-
-    void OnCollisionExit(Collision collision )
-    {
-        onGround = false;
-    }
+    
 
     private void PullTrigger ()
     {
-        requestJump();
+        if (!state.isGameOver)
+        {
+            requestJump();
+        }
 
     }
 
