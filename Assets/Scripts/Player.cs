@@ -11,7 +11,7 @@ public class Player : MonoBehaviour {
     public float jumpAngleInDegrees;
 
     //game state
-    private GameState state;
+    private LevelState state;
 
     //prevents flying effect
     private bool onGround;
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        state = GameObject.FindObjectOfType<GameState>();
+        state = GameObject.FindObjectOfType<LevelState>();
         
         //add handler for trigger events
         Cardboard.SDK.OnTrigger += PullTrigger;

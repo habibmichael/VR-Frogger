@@ -5,7 +5,7 @@ public class LethalCollider : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision )
     {
-        GameState state = FindObjectOfType<GameState>();
+        LevelState state = FindObjectOfType<LevelState>();
         Player player = FindObjectOfType<Player>();
         if (collision.collider == player.GetComponent<CapsuleCollider>())
         {

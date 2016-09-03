@@ -1,20 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour {
 
-    public bool isGameOver {
-        get;set;
+    private int highScore;
+
+	void Awake ()
+    {
+        DontDestroyOnLoad(gameObject);
     }
 
-    public void resetGame ()
+ public void updateHighScore(int score )
     {
-        SceneManager.LoadScene("Main");
+        if (score > highScore)
+        {
+            highScore = score;
+        }
     }
 
-    public void back2MainMenu ()
-    {
-        SceneManager.LoadScene("SplashScreen");
-    }
+    public int getHighScore () { return highScore; }
+
+
 }

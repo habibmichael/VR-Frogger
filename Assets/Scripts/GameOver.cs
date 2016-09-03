@@ -6,7 +6,7 @@ public class GameOver : MonoBehaviour {
     private Player player;
     public float UIDistance=5f;
     public float UIHeight = 2f;
-    private GameState state;
+    private LevelState state;
     private Canvas canvas;
 
 	// Use this for initialization
@@ -14,7 +14,7 @@ public class GameOver : MonoBehaviour {
        canvas =   gameObject.GetComponent<Canvas>();
         canvas.enabled = false;
         player = GameObject.FindObjectOfType<Player>();
-        state = GameObject.FindObjectOfType<GameState>();
+        state = GameObject.FindObjectOfType<LevelState>();
 	
 	}
 	
@@ -26,6 +26,7 @@ public class GameOver : MonoBehaviour {
         {
             trackPlayerhead();
             canvas.enabled = true;
+
         }
 	}
     void trackPlayerhead ()
